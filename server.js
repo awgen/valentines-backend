@@ -19,10 +19,8 @@ app.post('/valentines', (req, res) => {
     const agree = req.body.agree
     const type = req.body.type
     const date = req.body.date;
-    const day = req.body.day;
-    const time = req.body.time;
-    db.query(`INSERT INTO valentines_data (is_agree, type, date, day, time) VALUES (?, ?, ?, ?, ?)`, 
-    [agree, type, date, day, time], 
+    db.query(`INSERT INTO valentines_data (is_agree, type, date) VALUES (?, ?, ?)`, 
+    [agree, type, date], 
     (err, result) => {
         if (err) {
             console.error('Error executing MySQL query:', err);
@@ -36,7 +34,7 @@ app.post('/valentines', (req, res) => {
 
 
 // Sending email verification
-function sendEmailVerification(agree, type, date, day, time) {
+function sendEmailVerification(agree, type, date) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -53,7 +51,7 @@ function sendEmailVerification(agree, type, date, day, time) {
       
       `     Did she Agree?: ${agree}
        What type of Date?: ${type}
-       when will it be?: ${date}, ${day}, ${time}.`
+       when will it be?: ${date}.`
     };
 
   
