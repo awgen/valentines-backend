@@ -28,7 +28,7 @@ app.post('/valentines', (req, res) => {
         }
         console.log('Successfully inserted into database.');
         res.status(200).json({ success: true });
-        sendEmailVerification(agree, type, date, day, time)
+        sendEmailVerification(agree, type, date)
     })
 })
 
